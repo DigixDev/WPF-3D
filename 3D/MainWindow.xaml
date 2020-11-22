@@ -1,0 +1,91 @@
+﻿<Window x:Class="_3D.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_3D"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        mc:Ignorable="d"
+        Title="WPF 3D" Height="600" Width="600" Icon="icon.ico">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="SymbolText">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="5,0,3,0"/>
+            <Setter Property="FontSize" Value="9.5"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="DescriptionText">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="FontSize" Value="9.5"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+        </Style>
+        
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/fonts/#ionicons"/>
+        </Style>
+        <Style TargetType="Slider">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+    <Grid MouseWheel="Grid_MouseWheel">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="#222"/>
+        <Viewport3D x:Name="viewport" MouseDown="viewport_MouseDown">
+            <ModelVisual3D x:Name="model">
+                <ModelVisual3D.Content>
+                    <Model3DGroup x:Name="group">
+                        <AmbientLight Color="DarkGray" />
+                    </Model3DGroup>
+                </ModelVisual3D.Content>
+            </ModelVisual3D>
+        </Viewport3D>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="[ KDTree Demo ]" Style="{StaticResource SymbolText}" Margin="0"/>
+            <Grid HorizontalAlignment="Right" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Mouse Wheel:" Style="{StaticResource DescriptionText}" Grid.Column="0"/>
+                <TextBlock Text="Zoom" Style="{StaticResource SymbolText}" Grid.Column="1"/>
+            </Grid>
+        </Grid>
+        <Grid Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Demo by:" Style="{StaticResource DescriptionText}"/>
+            <TextBlock Text="Mehran Sivari" Style="{StaticResource SymbolText}" TextAlignment="Left" Grid.Column="1"/>
+            <TextBlock Text="Email:" Style="{StaticResource DescriptionText}" Grid.Column="3"/>
+            <TextBlock Text="msivari@msn.com" Style="{StaticResource SymbolText}" TextAlignment="Right" Grid.Column="4"/>
+
+        </Grid>
+        
+        <Slider x:Name="sdHor" ValueChanged="sdHor_ValueChanged" Grid.Row="1" Orientation="Horizontal" Minimum="-170" Maximum="170" Value="0"/>
+        <Slider x:Name="sdVer" ValueChanged="sdVer_ValueChanged" Grid.Column="1" Orientation="Vertical" Minimum="-170" Maximum="170" Value="0"/>
+        <Button x:Name="btnHome" Grid.Row="1" Grid.Column="1" Content="&#xf49c;" Click="btnHome_Click"/>
+    
+    </Grid>
+</Window>
